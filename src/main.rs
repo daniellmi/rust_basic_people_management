@@ -1,4 +1,4 @@
-use std::io::{Read, stdin};
+use std::io::{stdin};
 
 struct Person {
     id: u8,
@@ -7,7 +7,7 @@ struct Person {
 }
 
 fn main() {
-    let mut person: Vec<Person> = Vec::new();
+    let mut people: Vec<Person> = Vec::new();
     let mut option = String::new();
     let mut cod: u8 = 0;
 
@@ -38,7 +38,7 @@ fn main() {
 
                 let age_parsed: u8 = age.trim().parse().expect("error");
 
-                person.push(Person {
+                people.push(Person {
                     id: cod,
                     name: name_t,
                     age: age_parsed,
@@ -46,7 +46,7 @@ fn main() {
             }
             2 => {
                 println!("All the people: ");
-                for p in &person {
+                for p in &people {
                     println!("id: {}, name: {} & age: {} ", p.id, p.name, p.age);
                 }
             }
@@ -57,7 +57,7 @@ fn main() {
 
                 let id_parsed: u8 = id.trim().parse().expect("error");
 
-                if let Some(p) = person.iter_mut().find(|p| p.id == id_parsed) {
+                if let Some(p) = people.iter_mut().find(|p| p.id == id_parsed) {
                     println!("What to dou want to modify?\n 1 - name\n 2 - Age");
                     let mut opt: String = String::new();
                     stdin().read_line(&mut opt).expect("error");
@@ -98,12 +98,12 @@ fn main() {
                 let d_id_parsed: u8 = d_id.trim().parse().expect("error");
 
                 // position func returns the index
-                if let Some(index) = person.iter_mut().position(|p| p.id == d_id_parsed) {
+                if let Some(index) = people.iter_mut().position(|p| p.id == d_id_parsed) {
                     // removes the array element by the index
-                    person.swap_remove(index);
+                    people.swap_remove(index);
 
                     println!("person removed");
-                    for x in &person {
+                    for x in &people {
                         println!("id: {} and name: {}", x.id, x.name);
                     }
                 } else {
